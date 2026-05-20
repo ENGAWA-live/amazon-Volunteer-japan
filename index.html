@@ -203,88 +203,104 @@
     }
 
     /* ─── LINKS — おしゃれ版 ─── */
-    .links-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 12px;
-    }
-
-    .link-card {
+    .links-list {
       background: var(--white);
       border-radius: 20px;
-      padding: 22px 20px;
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 2px 12px rgba(92,61,46,0.05);
-      transition: transform 0.22s, box-shadow 0.22s;
-      position: relative;
       overflow: hidden;
+      box-shadow: 0 2px 16px rgba(92,61,46,0.05);
     }
 
-    .link-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-    }
-    .link-card.c-slack  ::before,
-    .link-card.c-slack::before  { background: linear-gradient(90deg, #4CAF82, #36C5F0); }
-    .link-card.c-givhub::before { background: linear-gradient(90deg, var(--mauve), #D4A0C8); }
-    .link-card.c-cal::before    { background: linear-gradient(90deg, var(--orange), #F5A623); }
-    .link-card.c-form::before   { background: linear-gradient(90deg, var(--sky), #7EC8D8); }
-    .link-card.c-hnd::before    { background: linear-gradient(90deg, var(--brown), #8B6355); }
-
-    .link-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(92,61,46,0.12);
-    }
-
-    .link-top {
+    .link-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 28px;
+      text-decoration: none;
+      color: var(--brown);
+      border-bottom: 1px solid #F0EAE6;
+      position: relative;
+      transition: background 0.3s ease, padding-left 0.3s ease;
+    }
+    .link-row:last-child { border-bottom: none; }
+    .link-row::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0;
+      background: var(--orange);
+      transition: width 0.3s ease;
+    }
+    .link-row:hover {
+      background: #FCFAF7;
+      padding-left: 36px;
+    }
+    .link-row:hover::before {
+      width: 4px;
     }
 
-    .link-icon {
-      width: 44px; height: 44px;
-      border-radius: 14px;
+    .link-num {
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--mauve);
+      letter-spacing: 0.18em;
+      min-width: 28px;
+      flex-shrink: 0;
+    }
+
+    .link-mark {
+      width: 32px; height: 32px;
+      border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px;
+      font-size: 14px;
+      flex-shrink: 0;
+      background: var(--cream);
     }
-    .link-icon.slack  { background: #ECF8F2; }
-    .link-icon.givhub { background: var(--mauve-lt); }
-    .link-icon.cal    { background: #FEF0E6; }
-    .link-icon.form   { background: var(--sky-lt); }
-    .link-icon.hnd    { background: #F0EAE6; }
 
-    .link-arrow {
-      font-size: 16px;
+    .link-name {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .link-name strong {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+    .link-name span {
+      font-size: 11px;
       color: var(--gray);
-      opacity: 0.4;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .link-card:hover .link-arrow { opacity: 0.8; transform: translateX(3px); }
-
-    .link-text strong {
-      display: block;
-      font-size: 14px; font-weight: 700;
-      color: var(--brown); margin-bottom: 3px;
-    }
-    .link-text span {
-      font-size: 11px; color: var(--gray); font-weight: 300; line-height: 1.5;
+      font-weight: 300;
+      letter-spacing: 0.04em;
     }
 
-    /* ─── HND BADGES ─── */
-    .hnd-row {
-      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+    .link-arrow-min {
+      font-size: 14px;
+      color: var(--gray);
+      opacity: 0.5;
+      transition: transform 0.3s ease, opacity 0.3s ease, color 0.3s ease;
+      flex-shrink: 0;
     }
-    .hnd-badge {
-      font-size: 11px; font-weight: 700;
-      padding: 5px 14px; border-radius: 100px;
-      background: var(--brown); color: white;
-      letter-spacing: 0.06em;
+    .link-row:hover .link-arrow-min {
+      transform: translateX(6px);
+      opacity: 1;
+      color: var(--orange);
+    }
+
+    .hnd-row-mini {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+    .hnd-mini {
+      font-size: 9px;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 100px;
+      background: #F0EAE6;
+      color: var(--brown);
+      letter-spacing: 0.1em;
     }
 
     /* ─── WELCOME ─── */
@@ -304,20 +320,59 @@
       color: var(--brown); opacity: 0.65; line-height: 1.9;
     }
 
-    /* ─── GALLERY ─── */
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
+    /* ─── GALLERY — フェードスライド ─── */
+    .gallery-slide {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--cream);
+      box-shadow: 0 4px 24px rgba(92,61,46,0.08);
     }
-    .gallery-item {
-      aspect-ratio: 1;
-      border-radius: 18px;
-      background: var(--sky);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 32px; opacity: 0.55;
+
+    .gallery-slide .slide {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.6s ease;
     }
-    .gallery-item:first-child { grid-column: span 2; aspect-ratio: 2/1; }
+    .gallery-slide .slide.active { opacity: 1; }
+
+    /* プレースホルダー（写真が入るまでの色） */
+    .gallery-slide .slide.placeholder-1 { background: linear-gradient(135deg, var(--sky) 0%, var(--sky-lt) 100%); }
+    .gallery-slide .slide.placeholder-2 { background: linear-gradient(135deg, var(--mauve-lt) 0%, var(--cream) 100%); }
+    .gallery-slide .slide.placeholder-3 { background: linear-gradient(135deg, var(--cream) 0%, #FEF0E6 100%); }
+
+    .slide-caption {
+      position: absolute;
+      bottom: 24px;
+      left: 28px;
+      color: white;
+      font-size: 12px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+      opacity: 0.9;
+    }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      display: flex;
+      gap: 8px;
+    }
+    .slide-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.4;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .slide-dot.active { opacity: 1; transform: scale(1.3); }
 
     /* ─── FOOTER ─── */
     footer {
@@ -381,6 +436,26 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ─── BREATHING SECTION ─── */
+    .breathing {
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+    .breathing-line {
+      font-size: clamp(16px, 2.6vw, 20px);
+      font-weight: 300;
+      color: var(--brown);
+      opacity: 0;
+      letter-spacing: 0.14em;
+      line-height: 2.4;
+      transform: translateY(8px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .breathing.visible .breathing-line:nth-child(1) { opacity: 0.85; transform: translateY(0); transition-delay: 0.1s; }
+    .breathing.visible .breathing-line:nth-child(2) { opacity: 0.85; transform: translateY(0); transition-delay: 0.7s; }
+    .breathing.visible .breathing-line:nth-child(3) { opacity: 1; transform: translateY(0); transition-delay: 1.3s; color: var(--orange); font-weight: 400; }
+    .breathing-line:nth-child(3) { color: var(--orange); font-weight: 400; }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
       header { padding: 14px 18px; }
@@ -388,10 +463,12 @@
       .hero { padding: 60px 18px 52px; }
       .section { padding: 36px 16px; }
       .event-card { padding: 18px 16px; gap: 14px; }
-      .links-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-grid { grid-template-columns: 1fr 1fr; }
-      .gallery-item:first-child { grid-column: span 2; }
+      .link-row { padding: 18px 18px; gap: 14px; }
+      .link-row:hover { padding-left: 24px; }
+      .link-num { font-size: 10px; min-width: 22px; }
+      .gallery-slide { aspect-ratio: 4/5; }
       .welcome-card { padding: 30px 20px; }
+      .breathing { padding: 56px 18px 44px; }
     }
   </style>
 </head>
@@ -417,9 +494,16 @@
   <section class="hero">
     <p class="hero-eyebrow">Amazon Community Impact · May 2026</p>
     <h1>Amazon<br /><span>Volunteer</span> Japan</h1>
-    <p class="hero-sub">みんなで、地域へ。</p>
-    <a href="#events" class="hero-cta">今月の活動を見る →</a>
+    <p class="hero-sub">忙しい毎日に、ちょっとの余白を。</p>
+    <a href="#events" class="hero-cta">今月の活動を見る</a>
   </section>
+
+  <!-- BREATHING SECTION -->
+  <div class="section breathing">
+    <p class="breathing-line">深呼吸して、</p>
+    <p class="breathing-line">誰かのために、</p>
+    <p class="breathing-line">手を動かす時間。</p>
+  </div>
 
   <!-- EVENTS -->
   <div class="section" id="events">
@@ -509,57 +593,53 @@
   <div class="section" id="links">
     <p class="section-label">Links</p>
     <h2 class="section-title">リンク集</h2>
-    <div class="links-grid">
+    <div class="links-list">
 
-      <a href="#" class="link-card c-slack">
-        <div class="link-top">
-          <div class="link-icon slack">💬</div>
-          <span class="link-arrow">→</span>
-        </div>
-        <div class="link-text">
+      <a href="#" class="link-row">
+        <span class="link-num">01</span>
+        <div class="link-mark">💬</div>
+        <div class="link-name">
           <strong>Slack</strong>
-          <span>各チャンネルへ参加<br />HND10 / 11 / 17 / 21 / 25</span>
+          <span>各拠点のチャンネルへ</span>
+          <div class="hnd-row-mini">
+            <span class="hnd-mini">HND10</span>
+            <span class="hnd-mini">HND11</span>
+            <span class="hnd-mini">HND17</span>
+            <span class="hnd-mini">HND21</span>
+            <span class="hnd-mini">HND25</span>
+          </div>
         </div>
-        <div class="hnd-row">
-          <span class="hnd-badge">HND10</span>
-          <span class="hnd-badge">HND11</span>
-          <span class="hnd-badge">HND17</span>
-          <span class="hnd-badge">HND21</span>
-          <span class="hnd-badge">HND25</span>
-        </div>
+        <span class="link-arrow-min">→</span>
       </a>
 
-      <a href="#" class="link-card c-givhub">
-        <div class="link-top">
-          <div class="link-icon givhub">🤝</div>
-          <span class="link-arrow">→</span>
-        </div>
-        <div class="link-text">
+      <a href="#" class="link-row">
+        <span class="link-num">02</span>
+        <div class="link-mark">🤝</div>
+        <div class="link-name">
           <strong>GivHub</strong>
-          <span>活動一覧・参加記録<br />ボランティア履歴はこちら</span>
+          <span>活動一覧・参加記録</span>
         </div>
+        <span class="link-arrow-min">→</span>
       </a>
 
-      <a href="#" class="link-card c-cal">
-        <div class="link-top">
-          <div class="link-icon cal">📅</div>
-          <span class="link-arrow">→</span>
-        </div>
-        <div class="link-text">
+      <a href="#" class="link-row">
+        <span class="link-num">03</span>
+        <div class="link-mark">📅</div>
+        <div class="link-name">
           <strong>活動予約ページ</strong>
-          <span>参加登録・スケジュール確認<br />はじめての方もこちらから</span>
+          <span>はじめての方も、こちらから</span>
         </div>
+        <span class="link-arrow-min">→</span>
       </a>
 
-      <a href="#" class="link-card c-form">
-        <div class="link-top">
-          <div class="link-icon form">📝</div>
-          <span class="link-arrow">→</span>
-        </div>
-        <div class="link-text">
+      <a href="#" class="link-row">
+        <span class="link-num">04</span>
+        <div class="link-mark">📝</div>
+        <div class="link-name">
           <strong>お問い合わせ</strong>
-          <span>コアメンバーへ<br />気軽にどうぞ</span>
+          <span>コアメンバーへ気軽にどうぞ</span>
         </div>
+        <span class="link-arrow-min">→</span>
       </a>
 
     </div>
@@ -570,8 +650,18 @@
   <!-- WELCOME -->
   <div class="section">
     <div class="welcome-card">
-      <p class="big">一人でも、ふらっと来ていい。<br />来てみたら仲間になってた、<br />がここのスタイルです。</p>
-      <p class="small">チームじゃなくても大丈夫。はじめての方も歓迎です。<br />You're welcome to join solo — no team needed.</p>
+      <p class="big">仕事のこと、人間関係、<br />読みたい本、聴きたい音楽、<br />これからのこと。</p>
+      <p class="big" style="margin-top:18px;">気持ちはいつも忙しい。</p>
+      <p class="big" style="margin-top:24px; color:var(--orange);">ここでは、ちょっと深呼吸。</p>
+      <p class="small" style="margin-top:22px;">
+        誰かのために手を動かす時間が、<br />
+        じぶんの心にも余白をくれる。<br />
+        一人でも、ふらっと来ていい。<br />
+        そういう場所にしたいと思っています。
+      </p>
+      <p class="small" style="margin-top:14px; opacity:0.5;">
+        A little space for your heart, while you make space for someone else's.
+      </p>
     </div>
   </div>
 
@@ -579,16 +669,26 @@
 
   <!-- GALLERY -->
   <div class="section" id="gallery">
-    <p class="section-label">Gallery</p>
+    <p class="section-label">Moments</p>
     <h2 class="section-title">活動の様子</h2>
-    <div class="gallery-grid">
-      <div class="gallery-item">🍋</div>
-      <div class="gallery-item">🌿</div>
-      <div class="gallery-item">🤝</div>
-      <div class="gallery-item">🏙️</div>
+    <div class="gallery-slide" id="slideShow">
+      <div class="slide placeholder-1 active">
+        <div class="slide-caption">A LITTLE BREATH</div>
+      </div>
+      <div class="slide placeholder-2">
+        <div class="slide-caption">FOR SOMEONE</div>
+      </div>
+      <div class="slide placeholder-3">
+        <div class="slide-caption">FOR YOURSELF</div>
+      </div>
+      <div class="slide-dots">
+        <div class="slide-dot active"></div>
+        <div class="slide-dot"></div>
+        <div class="slide-dot"></div>
+      </div>
     </div>
-    <p style="font-size:11px; color:var(--gray); margin-top:14px; font-weight:300; letter-spacing:0.04em;">
-      写真が集まり次第追加していきます
+    <p style="font-size:11px; color:var(--gray); margin-top:18px; font-weight:300; letter-spacing:0.08em; text-align:center;">
+      写真は順次追加していきます
     </p>
   </div>
 
@@ -616,11 +716,26 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll(
-      '.event-card, .link-card, .welcome-card, .gallery-item, .section-label, .section-title'
+      '.event-card, .link-row, .welcome-card, .gallery-slide, .section-label, .section-title, .breathing'
     ).forEach(el => {
       el.classList.add('fade-in');
       observer.observe(el);
     });
+
+    // ─── ギャラリースライド：ゆっくりフェード切替（5秒ごと）
+    (function() {
+      const slides = document.querySelectorAll('#slideShow .slide');
+      const dots   = document.querySelectorAll('#slideShow .slide-dot');
+      if (!slides.length) return;
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove('active');
+        dots[idx].classList.remove('active');
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add('active');
+        dots[idx].classList.add('active');
+      }, 5000);
+    })();
   </script>
 
 </body>
