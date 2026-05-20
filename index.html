@@ -334,6 +334,53 @@
       opacity: 0.4; letter-spacing: 0.06em;
     }
 
+    /* ─── SMOOTH SCROLL ─── */
+    html { scroll-behavior: smooth; }
+
+    /* ─── HEADER SHADOW ON SCROLL ─── */
+    header {
+      transition: box-shadow 0.3s ease;
+    }
+    header.scrolled {
+      box-shadow: 0 4px 20px rgba(92,61,46,0.10);
+      border-bottom-color: transparent;
+    }
+
+    /* ─── FADE-IN ON SCROLL ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── STAGGER DELAY for lists ─── */
+    .fade-in:nth-child(1) { transition-delay: 0s; }
+    .fade-in:nth-child(2) { transition-delay: 0.08s; }
+    .fade-in:nth-child(3) { transition-delay: 0.16s; }
+    .fade-in:nth-child(4) { transition-delay: 0.24s; }
+    .fade-in:nth-child(5) { transition-delay: 0.32s; }
+
+    /* ─── HERO ENTRANCE ─── */
+    .hero-eyebrow,
+    .hero h1,
+    .hero-sub,
+    .hero-cta {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: heroFadeUp 0.7s ease forwards;
+    }
+    .hero h1       { animation-delay: 0.1s; }
+    .hero-sub      { animation-delay: 0.22s; }
+    .hero-cta      { animation-delay: 0.36s; }
+
+    @keyframes heroFadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     /* ─── RESPONSIVE ─── */
     @media (max-width: 600px) {
       header { padding: 14px 18px; }
@@ -368,7 +415,7 @@
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-eyebrow">Amazon Community Impact · May 2025</p>
+    <p class="hero-eyebrow">Amazon Community Impact · May 2026</p>
     <h1>Amazon<br /><span>Volunteer</span> Japan</h1>
     <p class="hero-sub">みんなで、地域へ。</p>
     <a href="#events" class="hero-cta">今月の活動を見る →</a>
@@ -376,7 +423,7 @@
 
   <!-- EVENTS -->
   <div class="section" id="events">
-    <p class="section-label">Schedule · May 2025</p>
+    <p class="section-label">Schedule · May 2026</p>
     <h2 class="section-title">今月の活動</h2>
     <div class="events-list">
 
@@ -550,6 +597,31 @@
     <p class="f-title">Amazon Volunteer Japan</p>
     <p class="f-sub">Amazon Community Impact · HND10 / HND11 / HND17 / HND21 / HND25</p>
   </footer>
+
+  <script>
+    // ─── ヘッダー：スクロールで影をつける
+    const header = document.querySelector('header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    // ─── スクロールで要素をふわっと表示
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(
+      '.event-card, .link-card, .welcome-card, .gallery-item, .section-label, .section-title'
+    ).forEach(el => {
+      el.classList.add('fade-in');
+      observer.observe(el);
+    });
+  </script>
 
 </body>
 </html>
